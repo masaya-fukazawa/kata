@@ -20,6 +20,7 @@ public class DiscountServiceImpl implements DiscountService {
         VehicleFamily vehicleFamily = drive.getVehicleFamily();
         RouteType routeType = drive.getRouteType();
 
+        // 平日
         if (canAppliedWeekdaysDiscount(drive)) {
             if (countPerMonth >= 10) {
                 return 50;
@@ -28,10 +29,12 @@ public class DiscountServiceImpl implements DiscountService {
             }
         }
 
+        // 深夜
         if (enteredAt <= 0 && exitedAt >= 4) {
             return 30;
         }
 
+        // 休日
         if (vehicleFamily != VehicleFamily.OTHER && routeType == RouteType.RURAL) {
             return 30;
         }
